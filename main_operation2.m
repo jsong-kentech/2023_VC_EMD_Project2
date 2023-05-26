@@ -39,9 +39,9 @@ P_ess = zeros(size(P_g));
 P_out = zeros(size(P_g));
 SOC = zeros(size(P_g));
 
-for i = 1:length(P_g)
+for i = 1:length(P_g) % loop for every time step
     
-    if i == 1
+    if i == 1 % for the first entry, special treatment to use the initial SOC
         if P_g(i)>P_d
     
             P_ess(i) = min(P_g(i)-P_d, (1-SOC_0)*size_ESS/dt);
