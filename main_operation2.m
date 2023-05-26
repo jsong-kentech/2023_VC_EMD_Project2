@@ -6,9 +6,9 @@ close all
 P_d = 100; % demand to meet [MW] baseload role
 
 % size your system
-size_PV = 100*10; % size of PV plant [MW]
-size_wind = 100*10; % size of wind plant [MW]
-size_ESS = 100*100; % size of ESS [MWh]
+size_PV = 100*20; % size of PV plant [MW]
+size_wind = 100*30; % size of wind plant [MW]
+size_ESS = 100*50; % size of ESS [MWh]
 
 % load the weather data
 data = readtable('OBS_ASOS_TIM_20230502131624.csv','filetype','text','ReadVariableNames',0);
@@ -41,31 +41,41 @@ SOC = zeros(size(P_g));
 
 for i = 1:length(P_g)
     
-
-    if i ==1
-        if P_g(i) > P_d % charging
-                P_ess(i) = min(P_g(i)-P_d,(1-SOC_0)*size_ESS/dt);
-        elseif P_g(i) < P_d % discharging
-                P_ess(i) = max(P_g(i)-P_d,-SOC_0*size_ESS/dt);
-        else
-            P_ess(i) = 0;
-        end
+    if i == 1
+        if P_g(i)>P_d
     
+            P_ess(i) = min(P_g(i)-P_d, (1-SOC_0)*size_ESS/dt);
+    
+        elseif P_g(i)<P_d
+            P_ess(i) = max(P_g(i)-P_d, -SOC_0*size_ESS/dt);
+    
+        else
+              P_ess(i) = 0;
+    
+        end
+         
         SOC(i) = SOC_0 + P_ess(i)*dt/size_ESS;
 
     else
-        if P_g(i) > P_d % charging
-                P_ess(i) = min(P_g(i)-P_d,(1-SOC(i-1))*size_ESS/dt);
-        elseif P_g(i) < P_d % discharging
-                P_ess(i) = max(P_g(i)-P_d,-SOC(i-1)*size_ESS/dt);
-        else
-            P_ess(i) = 0;
-        end
+        if P_g(i)>P_d
     
+            P_ess(i) = min(P_g(i)-P_d, (1-SOC(i-1))*size_ESS/dt);
+    
+        elseif P_g(i)<P_d
+            P_ess(i) = max(P_g(i)-P_d, -SOC(i-1)*size_ESS/dt);
+    
+        else
+              P_ess(i) = 0;
+    
+        end
+         
         SOC(i) = SOC(i-1) + P_ess(i)*dt/size_ESS;
 
     end
+
+
     P_out(i) = P_g(i) - P_ess(i);
+
 end
 
 % Plot
