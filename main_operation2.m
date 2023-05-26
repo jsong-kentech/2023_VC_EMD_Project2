@@ -18,10 +18,10 @@ data.Properties.VariableNames = {'site_id','site_name','datetime','T','V','I','T
 data.I(isnan(data.I)) = 0;
 
 % calculate the output of PV plant
-P_pv = func_PV(data.I,data.T,size_PV); % [kW] column vector
+P_pv = func_PV(data.I,data.T,size_PV); % [MW] column vector
 
 % calculate the output of Wind plant
-P_wind = func_Wind(data.V,size_wind); % [kW] column vector
+P_wind = func_Wind(data.V,size_wind); % [MW] column vector
 
 % ESS operation
 P_g = P_pv + P_wind;
