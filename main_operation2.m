@@ -17,14 +17,6 @@ data.Properties.VariableNames = {'site_id','site_name','datetime','T','V','I','T
 % Replace NaN in Insolation
 data.I(isnan(data.I)) = 0;
 
-
-% figure(2)
-% plot(data.datetime, data.I)
-% ylabel('Insolation')
-% return
-
-
-
 % calculate the output of PV plant
 P_pv = func_PV(data.I,data.T,size_PV); % [kW] column vector
 
