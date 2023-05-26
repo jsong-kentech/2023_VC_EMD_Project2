@@ -17,7 +17,7 @@ gamma = -0.5/100; % temperature coefficient [1/degC]
 eta = 0.77; % system efficiency [1]
 T_ref = 25; % reference temperature [degC]
 
-unit_ratio = 277.778;
+unit_ratio = 277.778; % unit conversion factor from MJ/m2/hr to W/m2
 
 % Model (refer to the lecture note)
 P_dc = ((unit_ratio*I)/I_ref*Pdc_ref).*(1+gamma*(T-T_ref)); % [MW] dc output

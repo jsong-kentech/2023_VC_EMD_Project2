@@ -21,7 +21,7 @@ P_turbine = interp1(table2(:,1),table2(:,8),V);
 
 
 % Plant output
-P_wind = P_turbine*(size_wind/size_turbine);
+P_wind = P_turbine*(size_wind/size_turbine); % normalize [kW] and then multiply by the size [ MW]
 
 
 end
