@@ -4,11 +4,11 @@ function P_wind = func_Wind(V,size_wind)
 
 % Inputs
 %   V: wind speed [m/s] column vec
-%   size_wind: wind turbine plant size [kW] positive scalar
+%   size_wind: wind turbine plant size [MW] positive scalar
 
 
 % Output
-%   P_wind: ac output to grid [kW] column vec
+%   P_wind: ac output to grid [MW] column vec
 
 % Parameters
 load("Staffell_2012_table2.mat", "table2"); %variable name: table2 (double)
